@@ -15,7 +15,7 @@ class Spritesheet:
 
 
 class Config:
-    TILE_SIZE = 32
+    TILE_SIZE = 24
     WINDOW_WIDTH = TILE_SIZE * 20
     WINDOW_HEIGHT = TILE_SIZE * 10
     BLACK = (0, 0, 0)
