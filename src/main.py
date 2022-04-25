@@ -153,32 +153,15 @@ class PlayerSprite(BaseSprite):
     def check_collision(self):
         hits = pygame.sprite.spritecollide(self, self.game.ground, False)
         for hit in hits:
-            if self.is_standing(hit):
+            if hit.rect.top >= self.rect.bottom + Config.MAX_GRAVITY:
                 self.rect.bottom = hit.rect.top
-                break
-            if self.hit_head(hit):
-                self.y_velocity = 0
-                self.rect.top = hit.rect.bottom
-                break
-
-        hits = pygame.sprite.spritecollide(self, self.game.ground, False)
-        for hit in hits:
-            hit_dir = hit.rect.x - self.rect.x
-            if hit_dir < 0:
-                self.rect.left = hit.rect.right
-            else:
-                self.rect.right = hit.rect.left
-
-        self.rect.y += 1
-        hits = pygame.sprite.spritecollide(self, self.game.ground, False)
-        self.standing = True if hits else False
-        self.rect.y -= 1
+                self.standing = True
 
 
 class GroundSprite(BaseSprite):
     def __init__(self, game, x, y):
         super().__init__(game, x, y, groups=game.ground, layer=0)
-        self.image.fill(Config.GREEN)
+        self.image.fill(Config.BLACK)
 
 
 class Game:
